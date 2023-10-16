@@ -1,23 +1,44 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const songsSlice = createSlice({
-  name: "song",
-  initialState: [],
+    name: "song",
+    initialState: [],
 
-  reducers: {
-    addSong(state, action) {
-      state.push(action.payload);
+    reducers: {
+        addSong(state, action) {
+            state.push(action.payload);
+        },
+        removeSong(state, action) {
+            const index = state.indexOf(action.payload);
+            state.splice(index, 1);
+        },
     },
-    removeSong(state, action) {},
-  },
+});
+
+const moviesSlice = createSlice({
+    name: "movie",
+    initialState: [],
+
+    reducers: {
+        addMovie(state, action) {
+            state.push(action.payload);
+        },
+
+        removeMovie(state, action) {
+            const index = state.indexOf(action.payload);
+            state.splice(index, 1);
+        },
+    },
 });
 
 // 你想要存入那些stateSlice
 const store = configureStore({
-  reducer: {
-    songs: songsSlice.reducer,
-  },
+    reducer: {
+        songs: songsSlice.reducer,
+        movies: moviesSlice.reducer,
+    },
 });
 
 export { store };
-export const { addSong } = songsSlice.actions;
+export const { addSong, removeSong } = songsSlice.actions;
+export const { addMovie, removeMovie } = moviesSlice.actions;
