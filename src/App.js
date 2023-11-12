@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import BookContext from "./context/books";
+import useBookCoutext from "./hooks/use-books-context";
 
 const App = () => {
-  const { count, increment } = useContext(BookContext);
+  const { count, increment } = useBookCoutext();
   return (
     <div>
       <h1>{count}</h1>
