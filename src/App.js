@@ -1,7 +1,14 @@
-import React from "react";
+import { useContext } from "react";
+import BookContext from "./context/books";
 
 const App = () => {
-  return <div>App</div>;
+  const { count, increment } = useContext(BookContext);
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={increment}>add</button>
+    </div>
+  );
 };
 
 export default App;
