@@ -8,7 +8,7 @@ const SortableTable = (props) => {
     const [sortOrder, setSortOrder] = useState(null);
     // 紀錄是誰該使用排序狀況
     const [sortBy, setSortBy] = useState(null);
-    const { config } = props;
+    const { config, data } = props;
 
     const handleClick = (label) => {
         if (label !== sortBy) {
@@ -47,7 +47,25 @@ const SortableTable = (props) => {
             ),
         };
     });
-    return <Table {...props} config={updatedConfig} />;
+
+    // 每一次render都重新刷新，所以都會有空間保留原始的順序
+    let sortedData = [...data];
+    if (sortBy && sortOrder) {
+        const { sortValue } = config.find((column) => column.label === sortBy);
+        sortedData.sort((a, b) => {
+            const valueA = sortValue(a);
+            const valueB = sortValue(b);
+
+            const reversedOrder = sortOrder === "asc" ? 1 : -1;
+
+            if (typeof valueA === "string") {
+                return valueA.localeCompare(valueB) * reversedOrder;
+            }
+            return (valueA - valueB) * reversedOrder;
+        });
+    }
+
+    return <Table {...props} data={sortedData} config={updatedConfig} />;
 };
 
 function getIcons(label, sortBy, sortOrder) {
