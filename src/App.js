@@ -1,7 +1,8 @@
-import React from "react";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  return <div>App</div>;
+    const songList = useSelector((state) => state.songs);
+    return <div>{songList}</div>;
 };
 
 export default App;
