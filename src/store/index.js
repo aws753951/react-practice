@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { songSlice } from "./slices/songSlice";
+import { songReducer, addSong, removeSong } from "./slices/songSlice";
 
 const store = configureStore({
     reducer: {
-        songs: songSlice.reducer,
+        songs: songReducer,
     },
 });
 
-export { store };
+export { store, addSong, removeSong }; // 給index.js + component使用
