@@ -1,20 +1,27 @@
 import { useSelector, useDispatch } from "react-redux";
-import { changeName, changeCost } from "../store/";
+import { changeName, changeCost, addCar } from "../store/";
+
 const CarForm = () => {
     const dispatch = useDispatch();
 
     const { name, cost } = useSelector((state) => state.form);
+
     const handleNameChange = (e) => {
         dispatch(changeName(e.target.value));
     };
     const handleCostChange = (e) => {
         dispatch(changeCost(parseInt(e.target.value) || 0)); // 如果非數字，則轉0，後續呈現轉 ""
     };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(addCar({ name, cost }));
+    };
+
     return (
         <div>
-            <div>
+            <div className="border-2">
                 <h4>Add Car</h4>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div>
                         <div>
                             <label>Name</label>
@@ -31,6 +38,7 @@ const CarForm = () => {
                             />
                         </div>
                     </div>
+                    <button>Submit</button>
                 </form>
             </div>
         </div>

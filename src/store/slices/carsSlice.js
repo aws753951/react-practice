@@ -3,7 +3,7 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 const carsSlice = createSlice({
     name: "cars",
     initialState: {
-        searchTerm: "", // 暫存car的資料
+        searchTerm: "",
         cars: [],
     },
     reducers: {
