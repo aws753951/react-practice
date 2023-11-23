@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { reset } from "../action";
 const songSlice = createSlice({
     name: "song", // 這個不重要，識別用的
     initialState: ["initial value"],
@@ -10,6 +11,11 @@ const songSlice = createSlice({
             const removedIndex = state.indexOf(action.payload);
             state.splice(removedIndex, 1);
         },
+    },
+    extraReducers(builder) {
+        builder.addCase(reset, (state, action) => {
+            return [];
+        });
     },
 });
 

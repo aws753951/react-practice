@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { addSong } from "./store";
+import { reset, addSong } from "./store";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -9,12 +9,17 @@ const App = () => {
         <div key={index}>{song}</div>
     ));
     const handleAddSong = () => {
-        dispatch(addSong("tttt song"));
+        dispatch(addSong("xxx"));
+    };
+
+    const handleDismiss = () => {
+        dispatch(reset());
     };
     return (
         <div>
             <div>{renderSongs}</div>
             <button onClick={handleAddSong}>add 1 song</button>
+            <button onClick={() => handleDismiss()}>dismiss</button>
         </div>
     );
 };
