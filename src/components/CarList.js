@@ -2,11 +2,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeCar } from "../store";
 const CarList = () => {
     const dispatch = useDispatch();
-    const cars = useSelector((state) => state.cars.data);
+    const cars = useSelector(({ cars: { searchTerm, data } }) => {
+        return data.filter(
+            (car) => car.name.toLowerCase().includes(searchTerm.toLowerCase()) // includes("") 則都會包含
+        );
+    });
 
     // 搭配 renderCar，每次iterate時投入car
     const handleDeleteCar = (car) => {
-        console.log(car.id);
         dispatch(removeCar(car.id));
     };
     const renderCars = cars.map((car) => {
