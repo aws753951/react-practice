@@ -1,16 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
-import { fetchUser } from "./store";
-import { useEffect } from "react";
+import UsersList from "./components/UsersList";
 
 const App = () => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchUser());
-    }, [dispatch]);
-
-    const data = useSelector((state) => state.users.data);
-    console.log(data);
-    return <div>App</div>;
+    return (
+        <div className="container mx-auto">
+            <UsersList />
+        </div>
+    );
 };
 
 export default App;
